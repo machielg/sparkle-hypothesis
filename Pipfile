@@ -5,9 +5,11 @@ verify_ssl = true
 
 [dev-packages]
 pyspark = "==2.4.0"
+pybuilder = "*"
 
 [packages]
 hypothesis = "*"
+sparkle-test = "*"
 
 [requires]
 python_version = "3.6"
