@@ -1,21 +1,17 @@
 from datetime import date, datetime
-from unittest import TestCase
 
 from hypothesis import given, assume, settings
-from hypothesis._strategies import just
-from hypothesis.strategies import dates
+from hypothesis.strategies import dates, just
 
-from sparkle_hypothesis.utils import simple_text_or_none, none_or, d_to_s, d_to_dt, today
+from default_test_case import DefaultTestCase
+from sparkle_hypothesis import simple_text_or_none, none_or, d_to_s, d_to_dt, today
 
 
-class UtilsTestCase(TestCase):
-
-    def __init__(self, t):
-        super().__init__(t)
-        settings.load_profile('default')
+class UtilsTestCase(DefaultTestCase):
 
     @given(simple_text_or_none)
-    def test_simple_text_none(self, text):
+    def test_simple_text_none_none(self, text):
+        self.assertIsNotNone(settings().deadline)
         assume(text is None)
         self.assertIsNone(text)
 

@@ -1,12 +1,17 @@
-from logging import Logger
-
 from hypothesis import settings, HealthCheck
 
-
-def register_profile():
-    settings.register_profile("pyspark", deadline=None, suppress_health_check=HealthCheck.all(), max_examples=10)
+settings.register_profile("pyspark", deadline=None, suppress_health_check=HealthCheck.all(), max_examples=10)
 
 
+# noinspection PyProtectedMember
 def load_pyspark_profile():
-    Logger("sparkle-hypothesis").warning("Switching hypothesis profile to 'pyspark'")
-    settings.load_profile("pyspark")
+    if settings()._current_profile != 'pyspark':
+        # Logger("sparkle-hypothesis").warning("Switching hypothesis profile to 'pyspark'")
+        settings.load_profile("pyspark")
+
+
+# noinspection PyProtectedMember
+def load_default_profile():
+    if settings()._current_profile != 'default':
+        # Logger("sparkle-hypothesis").warning("Switching hypothesis profile to 'default'")
+        settings.load_profile('default')

@@ -6,10 +6,6 @@ from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType, BooleanType, DateType, \
     TimestampType, LongType
 
-from sparkle_hypothesis.pyspark_profile import register_profile
-
-register_profile()
-
 
 def save_dfs(input_as_df: bool = False):
     """
@@ -66,9 +62,11 @@ def _dicts_to_table(spark: SparkSession, d: Union[Dict, List[Dict]], tbl_name: s
         [rename_keys(e) for e in d]
         df = spark.createDataFrame(d, schema)
         df.createOrReplaceTempView(tbl_name)
+        return df
     else:
         empty_df = spark.createDataFrame(spark.sparkContext.emptyRDD(), StructType([]))
         empty_df.createOrReplaceTempView(tbl_name)
+        return empty_df
 
 
 def _dict_to_table(d: dict, spark: SparkSession, tbl_name: str):
