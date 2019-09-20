@@ -10,7 +10,7 @@ pip install sparkle-hypothesis
 
 ## Example
 ```python
-from sparkle_hypothesis import SparkleHypothesisTestCase
+from sparkle_hypothesis import SparkleHypothesisTestCase, save_dfs
 
 class MyTestCase(SparkleHypothesisTestCase)
     st_groups = st.sampled_from(['Pro', 'Consumer'])
