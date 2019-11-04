@@ -13,7 +13,7 @@ Data heavy tests benefit from Hypothesis to generate your data and desinging you
 easy to use Hypothesis strategies to generate dataframes.
 """
 default_task = ["clean", "analyze", "publish"]
-version = "1.0.0.dev"
+version = "1.0.1"
 
 url = "https://github.com/machielg/sparkle-hypothesis/"
 license = "GPLv3+"
