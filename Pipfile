@@ -10,6 +10,10 @@ pybuilder = "*"
 [packages]
 hypothesis = "*"
 sparkle-test = "*"
+sparkle-session = {editable = true,path = "/Users/machiel/dev/workspace/spark/sparkle-session/target/dist/sparkle-session-1.0.0.dev"}
 
 [requires]
 python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true

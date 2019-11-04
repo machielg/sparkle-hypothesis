@@ -1,6 +1,6 @@
 from hypothesis import settings, HealthCheck
 
-settings.register_profile("pyspark", deadline=None, suppress_health_check=HealthCheck.all(), max_examples=10)
+settings.register_profile("pyspark", deadline=None, suppress_health_check=HealthCheck.all(), max_examples=10, print_blob=True)
 
 
 # noinspection PyProtectedMember

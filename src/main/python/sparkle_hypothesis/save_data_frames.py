@@ -5,9 +5,10 @@ from hypothesis.internal.reflection import proxies
 from pyspark.sql import SparkSession
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType, BooleanType, DateType, \
     TimestampType, LongType
+from sparkle_session import sparkle_df
 
 
-def save_dfs(input_as_df: bool = False):
+def save_dfs(input_as_df: bool = False, input_as_sdf: bool = False):
     """
     #:param input_as_df feed your test method with data frames or (default) the original hypothesis data (Dicts)
 
@@ -34,11 +35,17 @@ def save_dfs(input_as_df: bool = False):
             spark = args[0].spark
             dict_names = list(inspect.signature(fn).parameters.keys())
             result = [_dicts_to_table(spark, d, dict_names[idx + 1]) for idx, d in enumerate(args[1:])]
-            if input_as_df:
+            if input_as_df or input_as_sdf:
                 head, *tail = args
-                args = [head] + result
+                args = [head] + sparkle_dfs(result)
             rc = fn(*args, **kwargs)
             return rc
+
+        def sparkle_dfs(result):
+            if input_as_sdf:
+                return [sparkle_df(r).cache() for r in result]
+            else:
+                return result
 
         return wrapped
 

@@ -13,10 +13,10 @@ Data heavy tests benefit from Hypothesis to generate your data and desinging you
 easy to use Hypothesis strategies to generate dataframes.
 """
 default_task = ["clean", "analyze", "publish"]
-version = "1.0.0"
+version = "1.0.0.dev"
 
 url = "https://github.com/machielg/sparkle-hypothesis/"
-licence = "GPLv3+"
+license = "GPLv3+"
 
 
 authors = [Author("Machiel Keizer Groeneveld", "machielg@gmail.com")]
@@ -25,6 +25,7 @@ def set_properties(project: Project):
     project.build_depends_on('pyspark')
     project.depends_on('hypothesis')
     project.depends_on('sparkle-test')
+    project.depends_on('sparkle-session')
 
     project.set_property("distutils_classifiers", [
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
