@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 
 from hypothesis import given
 from hypothesis.strategies import integers, fixed_dictionaries, lists
@@ -14,10 +14,24 @@ st_int_dict = fixed_dictionaries(
     {'foo:int': integers(min_value=1, max_value=5)}
 )
 
+st_just_inst = integers()
+
+st_just_list_inst = lists(integers())
+
 load_pyspark_profile()
 
 
 class SaveDataFramesTestCase(SparkleHypothesisTestCase):
+
+    @given(st_just_inst)
+    @save_dfs(input_as_df=True)
+    def test_int(self, one_int):
+        self.assertIsInstance(one_int, int)
+
+    @given(st_just_list_inst)
+    @save_dfs(input_as_sdf=True)
+    def test_int_list(self, one_int):
+        self.assertIsInstance(one_int, List)
 
     @given(integers(min_value=1, max_value=5))
     def test_generate_ints(self, an_int):

@@ -2,7 +2,7 @@ import inspect
 from typing import List, Union, Dict
 
 from hypothesis.internal.reflection import proxies
-from pyspark.sql import SparkSession
+from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType, BooleanType, DateType, \
     TimestampType, LongType
 from sparkle_session import sparkle_df
@@ -43,9 +43,15 @@ def save_dfs(input_as_df: bool = False, input_as_sdf: bool = False):
 
         def sparkle_dfs(result):
             if input_as_sdf:
-                return [sparkle_df(r).cache() for r in result]
+                return [_to_sdf(r) for r in result]
             else:
                 return result
+
+        def _to_sdf(r):
+            if isinstance(r, DataFrame):
+                return sparkle_df(r).cache()
+            else:
+                return r
 
         return wrapped
 
@@ -71,9 +77,7 @@ def _dicts_to_table(spark: SparkSession, d: Union[Dict, List[Dict]], tbl_name: s
         df.createOrReplaceTempView(tbl_name)
         return df
     else:
-        empty_df = spark.createDataFrame(spark.sparkContext.emptyRDD(), StructType([]))
-        empty_df.createOrReplaceTempView(tbl_name)
-        return empty_df
+        return d
 
 
 def _dict_to_table(d: dict, spark: SparkSession, tbl_name: str):
