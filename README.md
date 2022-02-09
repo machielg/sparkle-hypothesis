@@ -12,7 +12,7 @@ pip install sparkle-hypothesis
 ```python
 from sparkle_hypothesis import SparkleHypothesisTestCase, save_dfs
 
-class MyTestCase(SparkleHypothesisTestCase)
+class MyTestCase(SparkleHypothesisTestCase):
     st_groups = st.sampled_from(['Pro', 'Consumer'])
 
     st_customers = st.fixed_dictionaries(
@@ -21,7 +21,7 @@ class MyTestCase(SparkleHypothesisTestCase)
 
     st_groups = st.fixed_dictionaries(
         {'group_id:long': st.just(1),
-         'group_name:str': st.shared(st_groups, 'group'))
+         'group_name:str': st.shared(st_groups, 'group')
          })
 
     @given(st_customers, st_groups)
