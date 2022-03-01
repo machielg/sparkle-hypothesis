@@ -1,7 +1,7 @@
 import unittest
 
-from test1 import Test1
-from test2 import Test2
+from tests.test1 import Test1
+from tests.test2 import Test2
 
 loader = unittest.TestLoader()
 suite = unittest.TestSuite()

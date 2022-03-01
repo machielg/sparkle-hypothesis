@@ -1,7 +1,7 @@
 from hypothesis import settings, given
 from hypothesis.strategies import just
 
-from default_test_case import DefaultTestCase
+from tests.default_test_case import DefaultTestCase
 
 
 class Test2(DefaultTestCase):

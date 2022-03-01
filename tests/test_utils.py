@@ -3,7 +3,7 @@ from datetime import date, datetime
 from hypothesis import given, assume, settings
 from hypothesis.strategies import dates, just
 
-from default_test_case import DefaultTestCase
+from tests.default_test_case import DefaultTestCase
 from sparkle_hypothesis import simple_text_or_none, none_or, d_to_s, d_to_dt, today
 
 
