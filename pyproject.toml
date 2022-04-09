@@ -7,6 +7,7 @@ license = "GPL-3.0-or-later"
 classifiers = [
     "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
     "Environment :: Console",
+    "Framework :: Hypothesis",
     "Programming Language :: Python :: 3.7",
     "Topic :: Software Development :: Testing"
 ]
@@ -15,7 +16,7 @@ repository = "https://github.com/machielg/sparkle-hypothesis/"
 
 [tool.poetry.dependencies]
 python = ">=3.6,<4"
-hypothesis = "^5.35.3"
+hypothesis = ">=5.35.3"
 sparkle-test = "^1.1.0"
 sparkle-session = "^1.2.1"
 
